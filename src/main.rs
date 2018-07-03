@@ -122,3 +122,24 @@ fn calculasegons(temps: &String) -> u64 {
     }
     segons
 }
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn comprova_si_calculasegons_va_be() {
+        let proves: Vec<(u64, String)> = vec![
+            (1, String::from("0:0:1")),
+            (60, String::from("00:01:00")),
+            (61, String::from("00:01:01")),
+            (60 * 60, String::from("01:00:00")),
+            (60 * 60 + 5 * 60 + 15, String::from("01:05:15")),
+        ];
+
+        for prova in proves {
+            assert_eq!(prova.0, calculasegons(&prova.1));
+        }
+    }
+}
